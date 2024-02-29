@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-# Displays the PID, along with the process name (of all processes, whose name contain the word 'bash').
-# and cannot make use of the 'ps' command.
-
-pgrep -l bash
