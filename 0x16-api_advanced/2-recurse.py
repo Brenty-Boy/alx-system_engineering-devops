@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""returns a list containing the titles of all hot articles for a given subreddit"""
+"""returns a list containing the titles of all hot articles"""
+
 
 def recurse(subreddit, hot_list=[], count=0, after=None):
     """Queries the Reddit API and returns all hot posts
