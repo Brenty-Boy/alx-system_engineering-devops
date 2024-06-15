@@ -15,7 +15,8 @@ def number_of_subscribers(subreddit):
     """
     req = requests.get(
         "https://www.reddit.com/r/{}/about.json".format(subreddit),
-        headers={"User-Brenty_Boy_180774": "Custom"},
+        headers={
+            "User-Agent": "linux:0x16-api:v1.0 (by /u/Brenty_Boy_180774)"},
     )
 
     if req.status_code == 200:
