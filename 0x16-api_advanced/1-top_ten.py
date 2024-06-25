@@ -1,31 +1,36 @@
 #!/usr/bin/python3
-"""queries the Reddit API and prints the titles of the first 10 hot posts
-listed for a given subreddit.
+"""This script will return the number of subscribers associated with
+a subreddit
 """
-import requests
 import json
+import requests
+from sys import argv
 
 
 def top_ten(subreddit):
-    headers = {
-        "User-Agent": "linux:0x16-api_advanced:v1.0 (by /u/Brenty_Boy_180774)"
-    }
-    url = 'https://www.reddit.com/r/{:}/hot.json?limit=10'.format(subreddit)
-    r = requests.get(url, headers=headers, allow_redirects=False)
+    """Method get the number of users subscribed to a subreddit
 
-    # Check if the status code indicates a successful response
-    if r.status_code == 200:
-        # Check if the response content type is JSON
-        if 'application/json' in r.headers.get('Content-Type', ''):
-            try:
-                data_dict = r.json().get('data')
-                hot_list = data_dict.get('children')
-                for post in hot_list:
-                    sub_data_dict = post.get('data')
-                    print(sub_data_dict.get('title'))
-            except json.JSONDecodeError:
-                print("Failed to decode JSON from response.")
-        else:
-            print("The response is not in JSON format.")
-    else:
+    subreddit (Str)- subreddit to check
+
+    Returns - number of users (INT) else 0 (INT) if not subreddit is found
+    """
+    try:
+        headers = {
+                'User-Agent': 'win10_Pro:version.22H2 (by u/Brenty_Boy_180774)'
+                }
+        p = {'limit': 10}
+        url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+        req = requests.get(
+                url, headers=headers, params=p,
+                allow_redirects=False
+                ).json().get('data')
+
+        for post in req.get('children'):
+            print(post.get('data', None).get('title', None))
+
+    except Exception as e:
         print(None)
+
+
+if __name__ == "__main__":
+    pass
