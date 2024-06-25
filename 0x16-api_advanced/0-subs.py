@@ -9,25 +9,25 @@ from sys import argv
 
 
 def number_of_subscribers(subreddit):
-    url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    """Method get the number of users subscribed to a subreddit
+
+    subreddit (Str)- subreddit to check
+
+    Returns - number of users (INT) else 0 (INT) if not subreddit is found
+    """
     try:
-        response = requests.get(url, headers=headers)
-        if response.status_code == 200:
-            data = response.json()
-            return data['data']['subscribers']
-        else:
+        headers = {
+                "User-Agent": "win10_Pro:version.22H2 (by u/Brenty_Boy_180774)"
+                }
+        url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+        response = requests.get(url, headers=headers, allow_redirects=False)
+        if response.status_code == 404:
             return 0
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching data: {e}")
-        return 0
-    except KeyError:
+        results = response.json().get("data")
+        return results.get("subscribers")
+    except Exception as e:
         return 0
 
-# Example usage:
+
 if __name__ == "__main__":
-    subreddit = "programming"
-    print(f"Number of subscribers in subreddit '{subreddit}': {number_of_subscribers(subreddit)}")
-    
-    subreddit = "this_is_a_fake_subreddit"
-    print(f"Number of subscribers in subreddit '{subreddit}': {number_of_subscribers(subreddit)}")
+    pass
