@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-# installs nginx web server
+# Installs nginx server
 
- 
-apt-get -y update
+apt-get update
 apt-get -y install nginx
-chown -R ubuntu /var/www
+ufw allow 'Nginx HTTP'
 echo "Hello World!" > /var/www/html/index.html
-/etc/init.d/nginx restart
+service nginx start
