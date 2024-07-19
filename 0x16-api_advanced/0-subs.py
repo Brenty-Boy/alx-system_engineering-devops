@@ -14,7 +14,7 @@ def number_of_subscribers(subreddit):
     Returns - number of users (INT) else 0 (INT) if not subreddit is found 
     """
     try:
-        h = {'User-Agent': 'my-reddapp:version.1.0' (by u/Brenty_Boy_180774)
+        h = {'User-Agent': 'my-reddapp:version.1.0' (by /Brenty_Boy_180774)
         url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
         req = requests.get(url, headers=h)
     except Exception as e:
