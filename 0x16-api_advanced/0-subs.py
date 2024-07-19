@@ -1,38 +1,26 @@
 #!/usr/bin/python3
+"""This script will return the number of subscribers associated with 
+a subreddit
 """
-number of subscribers for a given subreddit
-"""
-
+import json
 import requests
-import sys
-
+from sys import argv
 
 def number_of_subscribers(subreddit):
-    url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {
-        'User-Agent': 'my-reddit-app:v1.0 (by /u/Brenty_Boy_180774)'
-    }
+    """Method get the number of users subscribed to a subreddit
+    
+    subreddit (Str)- subreddit to check
 
+    Returns - number of users (INT) else 0 (INT) if not subreddit is found 
+    """
     try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()
-        # Raise HTTPError for bad responses (4xx or 5xx)
-        results = response.json()
-        return results['data']['subscribers']
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching data: {e}")
-        return 0
-    except (KeyError, TypeError) as e:
-        print(f"Error parsing JSON: {e}")
-        return 0
+        h = {'User-Agent': 'my-reddapp:version.1.0' (by u/Brenty_Boy_180774)
+        url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+        req = requests.get(url, headers=h)
+    except Exception as e:
+        print(e)
 
+    return req.json().get('data').get('subscribers', 0)
 
-if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print("Please pass an argument for the subreddit to search.")
-    else:
-        subreddit = sys.argv[1]
-        print(
-                f"Number of subscribers in r/{subreddit}:
-                {number_of_subscribers(subreddit)}"
-                )
+if __name__ == "__main__":
+    pass
